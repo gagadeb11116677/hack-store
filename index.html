@@ -21,6 +21,7 @@
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --discount: #ff3b30;
         }
         
         * {
@@ -79,16 +80,55 @@
         }
         
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            position: relative;
         }
         
-        .logo i {
+        .logo img {
+            height: 50px;
+            width: auto;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.7));
+        }
+        
+        .logo:hover img {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.9));
+        }
+        
+        .logo span {
             font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary));
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .logo:hover::after {
+            opacity: 0.3;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
         nav ul {
@@ -121,10 +161,89 @@
             width: 100%;
         }
         
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Discount Banner */
+        .discount-banner {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, var(--discount), var(--accent));
+            color: white;
+            text-align: center;
+            padding: 10px;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .discount-banner h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        
+        .countdown-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 5px 10px;
+            min-width: 50px;
+        }
+        
+        .countdown-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .countdown-label {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+        
         .hero {
             text-align: center;
-            margin: 8rem 0 4rem 0;
+            margin: 12rem 0 4rem 0;
             letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: radial-gradient(circle at center, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+            z-index: -1;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
         
         .hero h1 {
@@ -136,6 +255,12 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1.2;
+            animation: shine 3s infinite alternate;
+        }
+        
+        @keyframes shine {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.2); }
         }
         
         .hero p {
@@ -158,6 +283,23 @@
             font-size: 1.1rem;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
         }
         
         .btn-primary:hover {
@@ -203,6 +345,7 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            transform: translateY(0);
         }
         
         .price-card::before {
@@ -246,6 +389,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             font-size: 1.05rem;
             transition: all 0.2s ease;
+            position: relative;
         }
         
         .price-item:hover {
@@ -258,6 +402,24 @@
         .price-item span:last-child {
             font-weight: 600;
             color: var(--accent);
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--discount);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
         
         .note small { 
@@ -291,6 +453,23 @@
             box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
             transition: all 0.3s;
             font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+        
+        .whatsapp-btn:hover::before {
+            left: 100%;
         }
         
         .whatsapp-btn:hover {
@@ -390,41 +569,6 @@
             overflow: hidden !important;
         }
         
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .container { max-width: 98vw; }
-        }
-        
-        @media (max-width: 900px) {
-            .price-grid { grid-template-columns: 1fr; }
-            nav ul { display: none; }
-        }
-        
-        @media (max-width: 700px) {
-            .container { padding: 1rem 2vw 2rem 2vw; }
-            .hero { font-size: 1.1em; }
-            .price-card { padding: 1.2rem 0.7rem 1rem 0.7rem; }
-            .category-title { font-size: 1.1rem; }
-            .whatsapp-float { right: 10px; bottom: 10px; }
-            #introSplash h1 { font-size: 1.3em; }
-            #introSplash p { font-size: 1em; }
-            .hero h1 { font-size: 2rem; }
-        }
-        
-        @media (max-width: 480px) {
-            html, body { font-size: 15px; }
-            .container { padding: 0.5rem 1vw 1rem 1vw; }
-            .hero { font-size: 1em; }
-            .price-card { padding: 0.7rem 0.3rem 0.7rem 0.3rem; }
-            .category-title { font-size: 1em; }
-            .whatsapp-btn { font-size: 0.98em; padding: 10px 12px; }
-            #introSplash .luxury-logo { font-size: 2em; }
-            #introSplash h1 { font-size: 1em; }
-            #introSplash p { font-size: 0.95em; }
-            #introSplash .intro-bar { width: 140px; height: 10px; }
-            .hero h1 { font-size: 1.5rem; }
-        }
-        
         /* Order Form */
         .order-form-card {
             background: var(--card-bg);
@@ -501,6 +645,23 @@
             box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .order-form-card button[type="submit"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+        
+        .order-form-card button[type="submit"]:hover::before {
+            left: 100%;
         }
         
         .order-form-card button[type="submit"]:hover {
@@ -534,6 +695,7 @@
             box-shadow: var(--shadow);
             max-width: 90%;
             width: 400px;
+            animation: popIn 0.5s ease;
         }
         
         #orderSuccessModal h3 {
@@ -581,6 +743,26 @@
             transition: all 0.3s ease;
             border: 1px solid var(--border);
             box-shadow: var(--shadow);
+            transform: translateY(0);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(37, 99, 235, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
         }
         
         .feature-card:hover {
@@ -593,6 +775,13 @@
             font-size: 3rem;
             color: var(--accent);
             margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(10deg);
+            filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.7));
         }
         
         .feature-title {
@@ -626,10 +815,23 @@
             border-left: 4px solid var(--accent);
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
+            transform: translateX(0);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            right: 10px;
+            font-size: 8rem;
+            color: rgba(245, 158, 11, 0.1);
+            font-family: serif;
         }
         
         .testimonial-card:hover {
-            transform: translateY(-5px);
+            transform: translateX(5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
         }
         
@@ -638,6 +840,8 @@
             color: var(--text-secondary);
             margin-bottom: 1rem;
             line-height: 1.6;
+            position: relative;
+            z-index: 1;
         }
         
         .testimonial-author {
@@ -656,6 +860,11 @@
             justify-content: center;
             color: white;
             font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover .testimonial-avatar {
+            transform: rotate(360deg);
         }
         
         .testimonial-name {
@@ -865,6 +1074,278 @@
             align-items: center;
             gap: 10px;
         }
+        
+        /* Interactive Elements */
+        .interactive-card {
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .interactive-card::after {
+            content: 'Klik untuk detail';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(37, 99, 235, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .interactive-card:hover::after {
+            opacity: 1;
+        }
+        
+        .price-detail {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .price-detail.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Glow Effect */
+        .glow {
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.7);
+        }
+        
+        /* Resume Section */
+        .resume-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        
+        .resume-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .resume-header h2 {
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .resume-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .resume-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .resume-item {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 3px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .resume-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .resume-item h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .resume-item ul {
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .resume-item li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .footer-logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container { max-width: 98vw; }
+        }
+        
+        @media (max-width: 900px) {
+            .price-grid { grid-template-columns: 1fr; }
+            nav ul { display: none; }
+            .mobile-menu-btn { display: block; }
+        }
+        
+        @media (max-width: 700px) {
+            .container { padding: 1rem 2vw 2rem 2vw; }
+            .hero { font-size: 1.1em; }
+            .price-card { padding: 1.2rem 0.7rem 1rem 0.7rem; }
+            .category-title { font-size: 1.1rem; }
+            .whatsapp-float { right: 10px; bottom: 10px; }
+            #introSplash h1 { font-size: 1.3em; }
+            #introSplash p { font-size: 1em; }
+            .hero h1 { font-size: 2rem; }
+            .discount-banner { top: 70px; }
+            .discount-banner h3 { font-size: 1rem; }
+            .countdown { gap: 10px; }
+            .countdown-item { min-width: 40px; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 480px) {
+            html, body { font-size: 15px; }
+            .container { padding: 0.5rem 1vw 1rem 1vw; }
+            .hero { font-size: 1em; }
+            .price-card { padding: 0.7rem 0.3rem 0.7rem 0.3rem; }
+            .category-title { font-size: 1em; }
+            .whatsapp-btn { font-size: 0.98em; padding: 10px 12px; }
+            #introSplash .luxury-logo { font-size: 2em; }
+            #introSplash h1 { font-size: 1em; }
+            #introSplash p { font-size: 0.95em; }
+            #introSplash .intro-bar { width: 140px; height: 10px; }
+            .hero h1 { font-size: 1.5rem; }
+            .discount-banner { top: 60px; }
+            .discount-banner h3 { font-size: 0.9rem; }
+            .countdown { gap: 5px; }
+            .countdown-item { min-width: 35px; padding: 3px 5px; }
+            .countdown-value { font-size: 1rem; }
+            .logo img { height: 40px; }
+            .logo span { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body class="intro-active">
@@ -894,19 +1375,47 @@
     <header>
         <div class="container">
             <div class="logo">
-                <i class="fas fa-crown"></i>
+                <img src="https://files.catbox.moe/iu47p1.jpg" alt="HACK STORE Logo">
                 <span>HACK STORE</span>
             </div>
             <nav>
                 <ul>
                     <li><a href="#home">Beranda</a></li>
                     <li><a href="#services">Layanan</a></li>
+                    <li><a href="#about">Tentang</a></li>
                     <li><a href="#order">Order</a></li>
                     <li><a href="#community">Komunitas</a></li>
                 </ul>
             </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
+    
+    <!-- Discount Banner -->
+    <div class="discount-banner">
+        <h3><i class="fas fa-fire"></i> DISKON 50% SEMUA LAYANAN! <i class="fas fa-fire"></i></h3>
+        <p>Berlaku hingga 29 Desember 2023</p>
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-value" id="days">00</div>
+                <div class="countdown-label">Hari</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="hours">00</div>
+                <div class="countdown-label">Jam</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="minutes">00</div>
+                <div class="countdown-label">Menit</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="seconds">00</div>
+                <div class="countdown-label">Detik</div>
+            </div>
+        </div>
+    </div>
     
     <div id="mainContent" style="display:none;">
         <div class="container">
@@ -917,35 +1426,104 @@
                 <a href="#order" class="btn-primary">Order Sekarang</a>
             </section>
             
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-number" data-target="1000">0</div>
+                    <div class="stat-label">Pelanggan Puas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">Order Selesai</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">Jam Layanan</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">Tahun Pengalaman</div>
+                </div>
+            </section>
+            
             <!-- Features Section -->
             <section class="features">
-                <div class="feature-card">
+                <div class="feature-card interactive-card floating">
                     <div class="feature-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
                     <h3 class="feature-title">Cepat</h3>
                     <p class="feature-description">Pengerjaan kilat tanpa menunggu lama</p>
+                    <div class="price-detail">
+                        <p>Kami menyelesaikan order dengan kecepatan tinggi, biasanya dalam 1-2 jam untuk layanan standar.</p>
+                    </div>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card interactive-card floating" style="animation-delay: 0.2s;">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3 class="feature-title">Aman</h3>
                     <p class="feature-description">Tanpa password, login hanya dengan kode OTP</p>
+                    <div class="price-detail">
+                        <p>Kami tidak meminta password akun Anda. Login hanya menggunakan kode OTP yang dikirim ke email Anda.</p>
+                    </div>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card interactive-card floating" style="animation-delay: 0.4s;">
                     <div class="feature-icon">
                         <i class="fas fa-star"></i>
                     </div>
                     <h3 class="feature-title">Premium</h3>
                     <p class="feature-description">Layanan VIP dengan kualitas terbaik</p>
+                    <div class="price-detail">
+                        <p>Dapatkan layanan VIP dengan joki profesional yang berpengalaman dan hasil maksimal.</p>
+                    </div>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card interactive-card floating" style="animation-delay: 0.6s;">
                     <div class="feature-icon">
                         <i class="fas fa-users"></i>
                     </div>
                     <h3 class="feature-title">Terpercaya</h3>
                     <p class="feature-description">Ratusan testimoni dari pelanggan puas</p>
+                    <div class="price-detail">
+                        <p>Bergabunglah dengan ratusan pelanggan puas yang telah menggunakan layanan kami.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Resume Section -->
+            <section id="about" class="resume-section">
+                <div class="resume-header">
+                    <h2>TENTANG HACK STORE</h2>
+                    <p>Kami adalah tim profesional yang berdedikasi menyediakan layanan joki BloxFruits terbaik dengan pengalaman lebih dari 5 tahun</p>
+                </div>
+                <div class="resume-content">
+                    <div class="resume-item">
+                        <h3><i class="fas fa-history"></i> Sejarah Kami</h3>
+                        <ul>
+                            <li>Berdiri sejak 2018</li>
+                            <li>Melayani lebih dari 1000 pelanggan</li>
+                            <li>Tim profesional berpengalaman</li>
+                            <li>Sistem keamanan terjamin</li>
+                        </ul>
+                    </div>
+                    <div class="resume-item">
+                        <h3><i class="fas fa-trophy"></i> Keunggulan</h3>
+                        <ul>
+                            <li>Pengerjaan cepat dan tepat waktu</li>
+                            <li>Harga terjangkau dengan kualitas premium</li>
+                            <li>Layanan 24 jam non-stop</li>
+                            <li>Garansi kepuasan pelanggan</li>
+                        </ul>
+                    </div>
+                    <div class="resume-item">
+                        <h3><i class="fas fa-award"></i> Penghargaan</h3>
+                        <ul>
+                            <li>Best Joki Service 2022</li>
+                            <li>Top Rated Seller 2023</li>
+                            <li>Customer Choice Award</li>
+                            <li>Trusted Partner Roblox</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
             
@@ -968,64 +1546,76 @@
                 
                 <!-- Level Joki -->
                 <div class="price-grid">
-                    <div class="price-card">
+                    <div class="price-card interactive-card">
+                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title"><i class="fas fa-level-up-alt"></i> JOKI LEVEL</h3>
-                        <div class="price-item"><span>Level 100</span><span>5K</span></div>
-                        <div class="price-item"><span>Level 200</span><span>8K</span></div>
-                        <div class="price-item"><span>Level 300</span><span>11K</span></div>
-                        <div class="price-item"><span>Level 400</span><span>14K</span></div>
-                        <div class="price-item"><span>Level 500</span><span>17K</span></div>
-                        <div class="price-item"><span>Level 600</span><span>20K</span></div>
-                        <div class="price-item"><span>Level 700</span><span>23K</span></div>
-                        <div class="price-item"><span>Level 800</span><span>26K</span></div>
-                        <div class="price-item"><span>Level 900</span><span>29K</span></div>
-                        <div class="price-item"><span>Level 1000</span><span>32K</span></div>
-                        <div class="price-item"><span>Level 1100</span><span>35K</span></div>
-                        <div class="price-item"><span>Level 1200</span><span>38K</span></div>
-                        <div class="price-item"><span>Level 1300</span><span>41K</span></div>
-                        <div class="price-item"><span>Level 1400</span><span>44K</span></div>
-                        <div class="price-item"><span>Level 1500</span><span>47K</span></div>
-                        <div class="price-item"><span>Level 1600</span><span>50K</span></div>
-                        <div class="price-item"><span>Level 1700</span><span>53K</span></div>
-                        <div class="price-item"><span>Level 1800</span><span>56K</span></div>
-                        <div class="price-item"><span>Level 1900</span><span>59K</span></div>
-                        <div class="price-item"><span>Level 2000</span><span>62K</span></div>
-                        <div class="price-item"><span>Level 2100</span><span>65K</span></div>
-                        <div class="price-item"><span>Level 2200</span><span>68K</span></div>
-                        <div class="price-item"><span>Level 2300</span><span>71K</span></div>
-                        <div class="price-item"><span>Level 2400</span><span>74K</span></div>
-                        <div class="price-item"><span>Level 2450</span><span>77K</span></div>
-                        <div class="price-item"><span>Level 2500</span><span>80K</span></div>
-                        <div class="price-item"><span>Level 2600</span><span>85K</span></div>
-                        <div class="price-item"><span>Level 2700</span><span>90K</span></div>
-                        <div class="price-item"><span>Level 2800 (MAX)</span><span>95K</span></div>
+                        <div class="price-item"><span>Level 100</span><span>2.5K</span></div>
+                        <div class="price-item"><span>Level 200</span><span>4K</span></div>
+                        <div class="price-item"><span>Level 300</span><span>5.5K</span></div>
+                        <div class="price-item"><span>Level 400</span><span>7K</span></div>
+                        <div class="price-item"><span>Level 500</span><span>8.5K</span></div>
+                        <div class="price-item"><span>Level 600</span><span>10K</span></div>
+                        <div class="price-item"><span>Level 700</span><span>11.5K</span></div>
+                        <div class="price-item"><span>Level 800</span><span>13K</span></div>
+                        <div class="price-item"><span>Level 900</span><span>14.5K</span></div>
+                        <div class="price-item"><span>Level 1000</span><span>16K</span></div>
+                        <div class="price-item"><span>Level 1100</span><span>17.5K</span></div>
+                        <div class="price-item"><span>Level 1200</span><span>19K</span></div>
+                        <div class="price-item"><span>Level 1300</span><span>20.5K</span></div>
+                        <div class="price-item"><span>Level 1400</span><span>22K</span></div>
+                        <div class="price-item"><span>Level 1500</span><span>23.5K</span></div>
+                        <div class="price-item"><span>Level 1600</span><span>25K</span></div>
+                        <div class="price-item"><span>Level 1700</span><span>26.5K</span></div>
+                        <div class="price-item"><span>Level 1800</span><span>28K</span></div>
+                        <div class="price-item"><span>Level 1900</span><span>29.5K</span></div>
+                        <div class="price-item"><span>Level 2000</span><span>31K</span></div>
+                        <div class="price-item"><span>Level 2100</span><span>32.5K</span></div>
+                        <div class="price-item"><span>Level 2200</span><span>34K</span></div>
+                        <div class="price-item"><span>Level 2300</span><span>35.5K</span></div>
+                        <div class="price-item"><span>Level 2400</span><span>37K</span></div>
+                        <div class="price-item"><span>Level 2450</span><span>38.5K</span></div>
+                        <div class="price-item"><span>Level 2500</span><span>40K</span></div>
+                        <div class="price-item"><span>Level 2600</span><span>42.5K</span></div>
+                        <div class="price-item"><span>Level 2700</span><span>45K</span></div>
+                        <div class="price-item"><span>Level 2800 (MAX)</span><span>47.5K</span></div>
+                        <div class="price-detail">
+                            <p>Upgrade level karakter Anda dengan cepat dan aman. Kami menggunakan metode grinding yang efisien tanpa cheat.</p>
+                        </div>
                     </div>
-                    <div class="price-card">
+                    <div class="price-card interactive-card">
+                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title"><i class="fas fa-coins"></i> JOKI BELLY</h3>
-                        <div class="price-item"><span>1M Belly</span><span>3K</span></div>
-                        <div class="price-item"><span>5M Belly</span><span>10K</span></div>
-                        <div class="price-item"><span>10M Belly</span><span>15K</span></div>
-                        <div class="price-item"><span>15M Belly</span><span>20K</span></div>
-                        <div class="price-item"><span>20M Belly</span><span>25K</span></div>
-                        <div class="price-item"><span>30M Belly</span><span>35K</span></div>
-                        <div class="price-item"><span>40M Belly</span><span>45K</span></div>
-                        <div class="price-item"><span>50M Belly</span><span>55K</span></div>
-                        <div class="price-item"><span>60M Belly</span><span>65K</span></div>
-                        <div class="price-item"><span>70M Belly</span><span>75K</span></div>
-                        <div class="price-item"><span>80M Belly</span><span>85K</span></div>
-                        <div class="price-item"><span>90M Belly</span><span>95K</span></div>
-                        <div class="price-item"><span>100M Belly</span><span>105K</span></div>
+                        <div class="price-item"><span>1M Belly</span><span>1.5K</span></div>
+                        <div class="price-item"><span>5M Belly</span><span>5K</span></div>
+                        <div class="price-item"><span>10M Belly</span><span>7.5K</span></div>
+                        <div class="price-item"><span>15M Belly</span><span>10K</span></div>
+                        <div class="price-item"><span>20M Belly</span><span>12.5K</span></div>
+                        <div class="price-item"><span>30M Belly</span><span>17.5K</span></div>
+                        <div class="price-item"><span>40M Belly</span><span>22.5K</span></div>
+                        <div class="price-item"><span>50M Belly</span><span>27.5K</span></div>
+                        <div class="price-item"><span>60M Belly</span><span>32.5K</span></div>
+                        <div class="price-item"><span>70M Belly</span><span>37.5K</span></div>
+                        <div class="price-item"><span>80M Belly</span><span>42.5K</span></div>
+                        <div class="price-item"><span>90M Belly</span><span>47.5K</span></div>
+                        <div class="price-item"><span>100M Belly</span><span>52.5K</span></div>
+                        <div class="price-detail">
+                            <p>Dapatkan Belly (in-game currency) dalam jumlah besar untuk membeli item, senjata, dan upgrade karakter Anda.</p>
+                        </div>
                     </div>
-                    <div class="price-card">
+                    <div class="price-card interactive-card">
+                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title"><i class="fas fa-gem"></i> JOKI FRAGMEN</h3>
-                        <div class="price-item"><span>3.000 Fragmen</span><span>5K</span></div>
-                        <div class="price-item"><span>5.000 Fragmen</span><span>5K</span></div>
-                        <div class="price-item"><span>10.000 Fragmen</span><span>10K</span></div>
-                        <div class="price-item"><span>15.000 Fragmen</span><span>10K</span></div>
-                        <div class="price-item"><span>20.000 Fragmen</span><span>15K</span></div>
-                        <div class="price-item"><span>50.000 Fragmen</span><span>30K</span></div>
+                        <div class="price-item"><span>3.000 Fragmen</span><span>2.5K</span></div>
+                        <div class="price-item"><span>5.000 Fragmen</span><span>2.5K</span></div>
+                        <div class="price-item"><span>10.000 Fragmen</span><span>5K</span></div>
+                        <div class="price-item"><span>15.000 Fragmen</span><span>5K</span></div>
+                        <div class="price-item"><span>20.000 Fragmen</span><span>7.5K</span></div>
+                        <div class="price-item"><span>50.000 Fragmen</span><span>15K</span></div>
                         <div class="price-item note">
                             <small>📌 Pastikan memiliki banyak fruit jelek untuk ditukar menjadi chip</small>
+                        </div>
+                        <div class="price-detail">
+                            <p>Kumpulkan Fragmen untuk mengupgrade item dan senjata Anda. Fragmen sangat penting untuk mengoptimalkan build karakter.</p>
                         </div>
                     </div>
                 </div>
@@ -1033,77 +1623,105 @@
                 <!-- Mastery Sword -->
                 <h2 class="category-title"><i class="fas fa-swords"></i> JOKI MASTERY SWORD</h2>
                 <div class="price-grid">
-                    <div class="price-card">
+                    <div class="price-card interactive-card">
+                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title">Mastery 100-200</h3>
-                        <div class="price-item"><span>Saber</span><span>5K</span></div>
-                        <div class="price-item"><span>Rengoku</span><span>5K</span></div>
-                        <div class="price-item"><span>Shisui</span><span>5K</span></div>
-                        <div class="price-item"><span>Wando</span><span>5K</span></div>
-                        <div class="price-item"><span>Spikey Trident</span><span>5K</span></div>
-                        <div class="price-item"><span>Gravity Cane</span><span>5K</span></div>
-                        <div class="price-item"><span>Twin Hooks</span><span>5K</span></div>
+                        <div class="price-item"><span>Saber</span><span>2.5K</span></div>
+                        <div class="price-item"><span>Rengoku</span><span>2.5K</span></div>
+                        <div class="price-item"><span>Shisui</span><span>2.5K</span></div>
+                        <div class="price-item"><span>Wando</span><span>2.5K</span></div>
+                        <div class="price-item"><span>Spikey Trident</span><span>2.5K</span></div>
+                        <div class="price-item"><span>Gravity Cane</span><span>2.5K</span></div>
+                        <div class="price-item"><span>Twin Hooks</span><span>2.5K</span></div>
+                        <div class="price-detail">
+                            <p>Tingkatkan mastery senjata Anda untuk membuka skill dan damage yang lebih tinggi.</p>
+                        </div>
                     </div>
-                    <div class="price-card">
+                    <div class="price-card interactive-card">
+                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title">Mastery 200-400</h3>
-                        <div class="price-item"><span>Dark Dagger</span><span>5K</span></div>
-                        <div class="price-item"><span>Tushita</span><span>10K</span></div>
-                        <div class="price-item"><span>Yama</span><span>10K</span></div>
-                        <div class="price-item"><span>Buddy Sword</span><span>10K</span></div>
-                        <div class="price-item"><span>Hallow Scythe</span><span>10K</span></div>
-                        <div class="price-item"><span>True Triple Katana</span><span>10K</span></div>
-                        <div class="price-item"><span>Cursed Dual Katana</span><span>15K</span></div>
+                        <div class="price-item"><span>Dark Dagger</span><span>2.5K</span></div>
+                        <div class="price-item"><span>Tushita</span><span>5K</span></div>
+                        <div class="price-item"><span>Yama</span><span>5K</span></div>
+                        <div class="price-item"><span>Buddy Sword</span><span>5K</span></div>
+                        <div class="price-item"><span>Hallow Scythe</span><span>5K</span></div>
+                        <div class="price-item"><span>True Triple Katana</span><span>5K</span></div>
+                        <div class="price-item"><span>Cursed Dual Katana</span><span>7.5K</span></div>
+                        <div class="price-detail">
+                            <p>Mastery tinggi untuk senjata langka yang memberikan keuntungan signifikan dalam pertarungan.</p>
+                        </div>
                     </div>
-                    <div class="price-card">
+                    <div class="price-card interactive-card">
+                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title">Mastery 400-600</h3>
-                        <div class="price-item"><span>Midnight Blade</span><span>10K</span></div>
-                        <div class="price-item"><span>Pole (2nd Form)</span><span>15K</span></div>
-                        <div class="price-item"><span>Cursed Dual Katana</span><span>20K</span></div>
-                        <div class="price-item"><span>True Triple Katana</span><span>20K</span></div>
-                        <div class="price-item"><span>Hallow Scythe</span><span>15K</span></div>
+                        <div class="price-item"><span>Midnight Blade</span><span>5K</span></div>
+                        <div class="price-item"><span>Pole (2nd Form)</span><span>7.5K</span></div>
+                        <div class="price-item"><span>Cursed Dual Katana</span><span>10K</span></div>
+                        <div class="price-item"><span>True Triple Katana</span><span>10K</span></div>
+                        <div class="price-item"><span>Hallow Scythe</span><span>7.5K</span></div>
+                        <div class="price-detail">
+                            <p>Mastery maksimal untuk senjata terkuat dalam game. Damage dan skill yang luar biasa.</p>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Awakening Fruit -->
                 <h2 class="category-title"><i class="fas fa-fire"></i> JOKI AWAKENING FRUIT</h2>
                 <div class="price-grid">
-                    <div class="price-card">
-                        <div class="price-item"><span>Ice Awakened</span><span>15K</span></div>
-                        <div class="price-item"><span>Flame Awakened</span><span>15K</span></div>
-                        <div class="price-item"><span>Light Awakened</span><span>15K</span></div>
-                        <div class="price-item"><span>Quake Awakened</span><span>20K</span></div>
-                        <div class="price-item"><span>Dark Awakened</span><span>15K</span></div>
-                        <div class="price-item"><span>Sand Awakened</span><span>15K</span></div>
+                    <div class="price-card interactive-card">
+                        <div class="discount-badge">50% OFF</div>
+                        <div class="price-item"><span>Ice Awakened</span><span>7.5K</span></div>
+                        <div class="price-item"><span>Flame Awakened</span><span>7.5K</span></div>
+                        <div class="price-item"><span>Light Awakened</span><span>7.5K</span></div>
+                        <div class="price-item"><span>Quake Awakened</span><span>10K</span></div>
+                        <div class="price-item"><span>Dark Awakened</span><span>7.5K</span></div>
+                        <div class="price-item"><span>Sand Awakened</span><span>7.5K</span></div>
+                        <div class="price-detail">
+                            <p>Awakening Fruit untuk membuka potensi penuh dari kemampuan buah Anda.</p>
+                        </div>
                     </div>
-                    <div class="price-card">
-                        <div class="price-item"><span>Magma Awakened</span><span>20K</span></div>
-                        <div class="price-item"><span>Rumble Awakened</span><span>25K</span></div>
-                        <div class="price-item"><span>Phoenix Awakened</span><span>25K</span></div>
-                        <div class="price-item"><span>String Awakened</span><span>25K</span></div>
-                        <div class="price-item"><span>Dough Awakened</span><span>40K</span></div>
+                    <div class="price-card interactive-card">
+                        <div class="discount-badge">50% OFF</div>
+                        <div class="price-item"><span>Magma Awakened</span><span>10K</span></div>
+                        <div class="price-item"><span>Rumble Awakened</span><span>12.5K</span></div>
+                        <div class="price-item"><span>Phoenix Awakened</span><span>12.5K</span></div>
+                        <div class="price-item"><span>String Awakened</span><span>12.5K</span></div>
+                        <div class="price-item"><span>Dough Awakened</span><span>20K</span></div>
+                        <div class="price-detail">
+                            <p>Awakening untuk buah langka dengan kemampuan unik dan damage tinggi.</p>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Fighting Style -->
                 <h2 class="category-title"><i class="fas fa-fist-raised"></i> JOKI FIGHTING STYLE</h2>
                 <div class="price-grid">
-                    <div class="price-card">
-                        <div class="price-item"><span>Death Step</span><span>5K</span></div>
-                        <div class="price-item"><span>Electric Claw</span><span>10K</span></div>
-                        <div class="price-item"><span>Sharkman Karate</span><span>10K</span></div>
-                        <div class="price-item"><span>Superhuman</span><span>10K</span></div>
-                        <div class="price-item"><span>God Human</span><span>15K</span></div>
-                        <div class="price-item"><span>Dragon Talon (Tanpa Essence)</span><span>8K</span></div>
-                        <div class="price-item"><span>Dragon Talon (Dengan Essence)</span><span>15K</span></div>
+                    <div class="price-card interactive-card">
+                        <div class="discount-badge">50% OFF</div>
+                        <div class="price-item"><span>Death Step</span><span>2.5K</span></div>
+                        <div class="price-item"><span>Electric Claw</span><span>5K</span></div>
+                        <div class="price-item"><span>Sharkman Karate</span><span>5K</span></div>
+                        <div class="price-item"><span>Superhuman</span><span>5K</span></div>
+                        <div class="price-item"><span>God Human</span><span>7.5K</span></div>
+                        <div class="price-item"><span>Dragon Talon (Tanpa Essence)</span><span>4K</span></div>
+                        <div class="price-item"><span>Dragon Talon (Dengan Essence)</span><span>7.5K</span></div>
+                        <div class="price-detail">
+                            <p>Kuasai gaya bertarung terkuat dalam game untuk meningkatkan kemampuan bertarung karakter Anda.</p>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Race -->
                 <h2 class="category-title"><i class="fas fa-running"></i> JOKI RACE</h2>
                 <div class="price-grid">
-                    <div class="price-card">
-                        <div class="price-item"><span>Upgrade Race ke V2</span><span>5K</span></div>
-                        <div class="price-item"><span>Upgrade Race ke V3</span><span>10K</span></div>
-                        <div class="price-item"><span>Upgrade Race ke V4</span><span>40K</span></div>
+                    <div class="price-card interactive-card">
+                        <div class="discount-badge">50% OFF</div>
+                        <div class="price-item"><span>Upgrade Race ke V2</span><span>2.5K</span></div>
+                        <div class="price-item"><span>Upgrade Race ke V3</span><span>5K</span></div>
+                        <div class="price-item"><span>Upgrade Race ke V4</span><span>20K</span></div>
+                        <div class="price-detail">
+                            <p>Upgrade ras karakter Anda untuk membuka kemampuan dan bonus statistik yang lebih baik.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1278,6 +1896,54 @@
                 <span style="font-size:0.95em;">Join sekarang, dapatkan info promo, bukti order asli, dan testimoni pelanggan!</span>
             </a>
         </div>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <div class="footer-logo">
+                            <img src="https://files.catbox.moe/iu47p1.jpg" alt="HACK STORE Logo">
+                            <span>HACK STORE</span>
+                        </div>
+                        <p style="color: var(--text-secondary); margin-top: 1rem;">
+                            Professional BloxFruits Joki Service sejak 2018. Menyediakan layanan joki terpercaya dengan kualitas premium.
+                        </p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Layanan Kami</h3>
+                        <ul>
+                            <li><a href="#services">Joki Level</a></li>
+                            <li><a href="#services">Joki Belly</a></li>
+                            <li><a href="#services">Joki Fragmen</a></li>
+                            <li><a href="#services">Joki Mastery</a></li>
+                            <li><a href="#services">Awakening Fruit</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Menu</h3>
+                        <ul>
+                            <li><a href="#home">Beranda</a></li>
+                            <li><a href="#about">Tentang</a></li>
+                            <li><a href="#services">Layanan</a></li>
+                            <li><a href="#order">Order</a></li>
+                            <li><a href="#community">Komunitas</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Kontak</h3>
+                        <ul>
+                            <li><a href="https://wa.me/6283169934938"><i class="fab fa-whatsapp"></i> Admin 1</a></li>
+                            <li><a href="https://wa.me/6281258837595"><i class="fab fa-whatsapp"></i> Admin 2</a></li>
+                            <li><a href="https://whatsapp.com/channel/0029VbBKsVd7oQhVZBOpcX11"><i class="fab fa-whatsapp"></i> Channel Testimoni</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 HACK STORE. All rights reserved. Made with <i class="fas fa-heart" style="color: var(--danger);"></i> by HACK STORE Team</p>
+                </div>
+            </div>
+        </footer>
     </div>
     
     <script>
@@ -1296,6 +1962,83 @@
                     }, 500);
                 }, 700);
             }, 2600);
+        });
+
+        // Countdown Timer
+        function updateCountdown() {
+            const targetDate = new Date('December 29, 2023 23:59:59').getTime();
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+            
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                // Countdown is over
+                document.querySelector('.discount-banner h3').innerHTML = '<i class="fas fa-gift"></i> PROMO BERAKHIR <i class="fas fa-gift"></i>';
+                document.querySelector('.discount-banner p').textContent = 'Terima kasih telah berpartisipasi dalam promo kami!';
+                document.querySelector('.countdown').style.display = 'none';
+            }
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        // Animated Counter for Stats
+        function animateCounter() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / 200;
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(() => animateCounter(), 10);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+        
+        // Trigger counter animation when stats section is in view
+        const statsSection = document.querySelector('.stats-section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        // Interactive Cards
+        document.querySelectorAll('.interactive-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const detail = this.querySelector('.price-detail');
+                if (detail) {
+                    detail.classList.toggle('active');
+                }
+            });
         });
 
         // Order Form Submission
@@ -1414,6 +2157,46 @@ Mohon segera diproses, terima kasih.
                 header.style.padding = '1rem 0';
                 header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
             }
+        });
+        
+        // Add animation on scroll
+        const scrollObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, scrollObserverOptions);
+        
+        // Observe all feature cards and price cards
+        document.querySelectorAll('.feature-card, .price-card, .stat-card, .resume-item, .testimonial-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            scrollObserver.observe(card);
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav ul');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            nav.style.flexDirection = 'column';
+            nav.style.position = 'absolute';
+            nav.style.top = '100%';
+            nav.style.left = '0';
+            nav.style.width = '100%';
+            nav.style.background = 'rgba(15, 23, 42, 0.95)';
+            nav.style.padding = '1rem';
+            nav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
         });
     </script>
 </body>
