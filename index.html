@@ -1346,6 +1346,85 @@
             .logo img { height: 40px; }
             .logo span { font-size: 1.5rem; }
         }
+
+        /* --- TAMBAHAN CSS BARU (MUSIC PLAYER & CALCULATOR) --- */
+        #musicPlayer {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 99;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 10px 15px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        #musicPlayer:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+        .music-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .music-btn:hover { background: var(--accent); }
+        .music-info {
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .equalizer {
+            display: flex;
+            gap: 2px;
+            height: 12px;
+            align-items: flex-end;
+        }
+        .bar { width: 3px; background: var(--accent); animation: eq 1s infinite; }
+        .bar:nth-child(1) { height: 40%; animation-delay: 0s; }
+        .bar:nth-child(2) { height: 100%; animation-delay: 0.2s; }
+        .bar:nth-child(3) { height: 60%; animation-delay: 0.4s; }
+        @keyframes eq { 0%, 100% { height: 30%; } 50% { height: 100%; } }
+
+        /* Calculator Style */
+        .calculator-card {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+            border: 1px solid var(--primary);
+        }
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media(max-width: 600px) { .calc-grid { grid-template-columns: 1fr; } }
+        .calc-result-box {
+            background: rgba(0,0,0,0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .calc-total {
+            font-size: 2rem;
+            color: var(--accent);
+            font-weight: 800;
+        }
     </style>
 </head>
 <body class="intro-active">
@@ -1368,6 +1447,23 @@
                 <span style="color:var(--accent);">Order sekarang dan buktikan sendiri kemewahan layanan kami!</span></span>
             </p>
             <div class="intro-bar"><div class="intro-bar-inner"></div></div>
+        </div>
+    </div>
+
+    <!-- TAMBAHAN: MUSIC PLAYER HTML -->
+    <audio id="bgMusic" loop>
+        <source src="https://files.catbox.moe/ofcub9.mp3" type="audio/mp3">
+    </audio>
+    <div id="musicPlayer" onclick="toggleMusic()">
+        <button class="music-btn"><i class="fas fa-play" id="musicIcon"></i></button>
+        <div class="music-info">
+            <div style="font-size:0.7rem; opacity:0.7;">Music</div>
+            <div>Now Playing</div>
+        </div>
+        <div class="equalizer" id="equalizer" style="opacity:0;">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
         </div>
     </div>
     
@@ -1789,6 +1885,29 @@
                 </div>
             </section>
             
+            <!-- TAMBAHAN: CALCULATOR SECTION -->
+            <section id="calculator" class="order-form-card calculator-card">
+                <h2 class="category-title"><i class="fas fa-calculator"></i> KALKULATOR HARGA</h2>
+                <div class="calc-grid">
+                    <div>
+                        <label style="color:var(--primary); font-weight:600;">Pilih Layanan</label>
+                        <select id="calcService" onchange="calculatePrice()" style="width:100%; padding:10px; border-radius:8px; background:rgba(15,23,42,0.8); border:1px solid var(--border); color:white; margin-bottom:10px;">
+                            <option value="level">Joki Level</option>
+                            <option value="belly">Joki Belly</option>
+                            <option value="fragmen">Joki Fragmen</option>
+                        </select>
+                        <label style="color:var(--primary); font-weight:600;">Jumlah / Target</label>
+                        <input type="number" id="calcAmount" value="100" oninput="calculatePrice()" style="width:100%; padding:10px; border-radius:8px; background:rgba(15,23,42,0.8); border:1px solid var(--border); color:white;">
+                        <small style="color:var(--text-secondary); font-size:0.8rem; display:block; margin-top:5px;">Contoh: Level 100 (Input 100) atau 10M Belly (Input 10)</small>
+                    </div>
+                    <div class="calc-result-box">
+                        <div style="font-size:0.9rem; color:var(--text-secondary);">Estimasi Total</div>
+                        <div class="calc-total" id="calcTotal">Rp 0</div>
+                        <small style="color:var(--text-secondary);">*Hanya estimasi, harga pasti cek WA</small>
+                    </div>
+                </div>
+            </section>
+            
             <!-- Order Form -->
             <section id="order" class="order-form-card">
                 <h2 class="category-title"><i class="fas fa-shopping-cart"></i> FORM ORDER</h2>
@@ -1947,6 +2066,60 @@
     </div>
     
     <script>
+        // --- TAMBAHAN SCRIPT BARU (MUSIC & CALCULATOR) ---
+        
+        // 1. Music Player Logic
+        const bgMusic = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const equalizer = document.getElementById('equalizer');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-play');
+                equalizer.style.opacity = '0';
+            } else {
+                bgMusic.play().catch(e => alert("Klik tombol musik untuk memutar (Autolicy dicegah browser)"));
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+                equalizer.style.opacity = '1';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // 2. Calculator Logic
+        function calculatePrice() {
+            const service = document.getElementById('calcService').value;
+            const amount = parseFloat(document.getElementById('calcAmount').value) || 0;
+            let price = 0;
+
+            // Harga dasar berdasarkan list harga asli (Diskon 50% sudah diterapkan di list)
+            // Level: 100 = 2.5K (25/level), 1000 = 16K (16/level), 2500 = 40K (16/level)
+            // Belly: 1M = 1.5K
+            // Fragmen: 10k = 5K (0.5/fragmen)
+
+            if (service === 'level') {
+                // Menggunakan rata-rata estimasi untuk kalkulator sederhana
+                if(amount <= 500) price = amount * 25; // 2.5k per 100 level = 25 per level
+                else if(amount <= 1000) price = 8500 + ((amount - 500) * 15);
+                else price = 16000 + ((amount - 1000) * 15);
+            } else if (service === 'belly') {
+                price = amount * 1500; // Input dalam 'Juta', harga 1.5k per Juta
+            } else if (service === 'fragmen') {
+                price = amount * 0.5; // Input dalam 'Ribuan', harga 5k per 10k fragmen = 0.5k per 1000
+            }
+
+            document.getElementById('calcTotal').innerText = 'Rp ' + Math.round(price).toLocaleString('id-ID');
+        }
+
+        // Jalankan kalkulator sekali saat load
+        calculatePrice();
+
+
+        // --- SCRIPT ASLI TANPA PERUBAHAN ---
+        
         // Intro Splash auto close & tampilkan mainContent
         window.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
