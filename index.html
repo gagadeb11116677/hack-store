@@ -172,25 +172,18 @@
             cursor: pointer;
         }
         
-        /* Discount Banner */
+        /* Banner Update Style */
         .discount-banner {
             position: fixed;
             top: 80px;
             left: 0;
             width: 100%;
-            background: linear-gradient(90deg, var(--discount), var(--accent));
+            background: linear-gradient(90deg, var(--success), var(--primary));
             color: white;
             text-align: center;
             padding: 10px;
             z-index: 999;
-            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
         }
         
         .discount-banner h3 {
@@ -199,33 +192,9 @@
             margin-bottom: 5px;
         }
         
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 5px;
-        }
-        
-        .countdown-item {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            padding: 5px 10px;
-            min-width: 50px;
-        }
-        
-        .countdown-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-        
-        .countdown-label {
-            font-size: 0.7rem;
-            opacity: 0.8;
-        }
-        
         .hero {
             text-align: center;
-            margin: 12rem 0 4rem 0;
+            margin: 8rem 0 4rem 0; /* Margin adjusted since banner is smaller/removed countdown */
             letter-spacing: 1px;
             position: relative;
         }
@@ -405,24 +374,6 @@
             color: var(--accent);
         }
         
-        .discount-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--discount);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            animation: blink 1.5s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
         .note small { 
             color: var(--text-secondary); 
             font-size: 0.9rem; 
@@ -476,14 +427,6 @@
         .whatsapp-btn:hover {
             transform: scale(1.05) translateY(-5px);
             box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
-        }
-        
-        .badge {
-            background: var(--danger);
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-left: 10px;
         }
         
         /* Intro Splash */
@@ -560,17 +503,12 @@
             100% { transform: scale(1); }
         }
         
-        @keyframes shine {
-            from { text-shadow: 0 0 24px var(--accent), 0 0 60px var(--primary); }
-            to { text-shadow: 0 0 48px var(--accent), 0 0 120px var(--secondary); }
-        }
-        
         /* Hide scroll when intro active */
         body.intro-active {
             overflow: hidden !important;
         }
         
-        /* Order Form */
+        /* --- NEW ORDER FORM STYLE (Rapi & Aman) --- */
         .order-form-card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
@@ -579,73 +517,128 @@
             padding: 2rem;
             margin-top: 3rem;
             box-shadow: var(--shadow);
-            max-width: 600px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             position: relative;
             overflow: hidden;
+            border-top: 4px solid var(--primary);
         }
-        
-        .order-form-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-        
-        .order-form-card h2 {
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            font-size: 1.5em;
-            letter-spacing: 0.5px;
+
+        .order-header {
             text-align: center;
+            margin-bottom: 2rem;
         }
         
-        .order-form-card label {
-            display: block;
+        .order-header h2 {
+            color: var(--accent);
             margin-bottom: 0.5rem;
-            color: var(--primary);
-            font-weight: 600;
+            font-size: 1.8rem;
+            letter-spacing: 0.5px;
         }
-        
-        .order-form-card select,
-        .order-form-card input,
+
+        .order-security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* Grid Layout for Form */
+        .order-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .form-section-title {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+            position: relative;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            color: var(--text-secondary);
+            z-index: 2;
+            transition: color 0.3s;
+        }
+
+        .order-form-card input, 
+        .order-form-card select, 
         .order-form-card textarea {
             width: 100%;
-            padding: 12px;
+            padding: 12px 12px 12px 45px; /* Space for icon */
             border-radius: 8px;
             border: 1px solid var(--border);
-            margin-bottom: 1.2rem;
-            font-size: 1rem;
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.6);
             color: var(--text-primary);
+            font-size: 0.95rem;
             transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
         }
-        
-        .order-form-card select:focus,
-        .order-form-card input:focus,
+
+        .order-form-card input:focus, 
+        .order-form-card select:focus, 
         .order-form-card textarea:focus {
             border-color: var(--primary);
             outline: none;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .order-form-card input:focus + i,
+        .order-form-card select:focus + i,
+        .input-wrapper:focus-within i {
+            color: var(--primary);
+        }
+
+        .order-form-card textarea {
+            resize: vertical;
+            min-height: 80px;
         }
         
         .order-form-card button[type="submit"] {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white;
-            font-weight: 600;
+            font-weight: 700;
             border: none;
             border-radius: 8px;
-            padding: 14px 0;
+            padding: 16px 0;
             font-size: 1.1rem;
             width: 100%;
-            margin-top: 0.5rem;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
             transition: all 0.3s ease;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             position: relative;
             overflow: hidden;
         }
@@ -666,17 +659,27 @@
         }
         
         .order-form-card button[type="submit"]:hover {
-            background: linear-gradient(90deg, var(--secondary), var(--primary));
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
         }
-        
-        .order-form-card small {
+
+        .otp-reminder {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 3px solid var(--accent);
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            display: block;
-            margin-top: -0.8rem;
-            margin-bottom: 1.2rem;
-            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        @media(max-width: 768px) {
+            .order-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .order-form-card { padding: 1.5rem; }
+            .hero h1 { font-size: 2.2rem; }
         }
         
         /* Modal */
@@ -722,11 +725,6 @@
             transition: all 0.3s ease;
         }
         
-        #orderSuccessModal button:hover {
-            background: linear-gradient(90deg, var(--secondary), var(--primary));
-            transform: translateY(-2px);
-        }
-        
         /* Features Section */
         .features {
             display: grid;
@@ -747,23 +745,6 @@
             transform: translateY(0);
             position: relative;
             overflow: hidden;
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(37, 99, 235, 0.1), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .feature-card:hover::before {
-            opacity: 1;
         }
         
         .feature-card:hover {
@@ -871,11 +852,6 @@
         .testimonial-name {
             font-weight: 600;
             color: var(--accent);
-        }
-        
-        .testimonial-date {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
         }
         
         /* Community Section */
@@ -1056,24 +1032,6 @@
             margin-bottom: 12px;
             color: var(--text-secondary);
             line-height: 1.6;
-        }
-        
-        /* Why Choose Us */
-        .why-choose-section {
-            background: rgba(37, 99, 235, 0.1);
-            border: 1px solid rgba(37, 99, 235, 0.3);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 3rem 0;
-            box-shadow: var(--shadow);
-        }
-        
-        .why-choose-section h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         
         /* Interactive Elements */
@@ -1299,56 +1257,8 @@
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .container { max-width: 98vw; }
-        }
-        
-        @media (max-width: 900px) {
-            .price-grid { grid-template-columns: 1fr; }
-            nav ul { display: none; }
-            .mobile-menu-btn { display: block; }
-        }
-        
-        @media (max-width: 700px) {
-            .container { padding: 1rem 2vw 2rem 2vw; }
-            .hero { font-size: 1.1em; }
-            .price-card { padding: 1.2rem 0.7rem 1rem 0.7rem; }
-            .category-title { font-size: 1.1rem; }
-            .whatsapp-float { right: 10px; bottom: 10px; }
-            #introSplash h1 { font-size: 1.3em; }
-            #introSplash p { font-size: 1em; }
-            .hero h1 { font-size: 2rem; }
-            .discount-banner { top: 70px; }
-            .discount-banner h3 { font-size: 1rem; }
-            .countdown { gap: 10px; }
-            .countdown-item { min-width: 40px; }
-            .footer-content { grid-template-columns: 1fr; }
-        }
-        
-        @media (max-width: 480px) {
-            html, body { font-size: 15px; }
-            .container { padding: 0.5rem 1vw 1rem 1vw; }
-            .hero { font-size: 1em; }
-            .price-card { padding: 0.7rem 0.3rem 0.7rem 0.3rem; }
-            .category-title { font-size: 1em; }
-            .whatsapp-btn { font-size: 0.98em; padding: 10px 12px; }
-            #introSplash .luxury-logo { font-size: 2em; }
-            #introSplash h1 { font-size: 1em; }
-            #introSplash p { font-size: 0.95em; }
-            #introSplash .intro-bar { width: 140px; height: 10px; }
-            .hero h1 { font-size: 1.5rem; }
-            .discount-banner { top: 60px; }
-            .discount-banner h3 { font-size: 0.9rem; }
-            .countdown { gap: 5px; }
-            .countdown-item { min-width: 35px; padding: 3px 5px; }
-            .countdown-value { font-size: 1rem; }
-            .logo img { height: 40px; }
-            .logo span { font-size: 1.5rem; }
-        }
 
-        /* --- TAMBAHAN CSS BARU (MUSIC PLAYER & CALCULATOR) --- */
+        /* Music Player & Calculator Styles */
         #musicPlayer {
             position: fixed;
             bottom: 30px;
@@ -1426,6 +1336,48 @@
             color: var(--accent);
             font-weight: 800;
         }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container { max-width: 98vw; }
+        }
+        
+        @media (max-width: 900px) {
+            .price-grid { grid-template-columns: 1fr; }
+            nav ul { display: none; }
+            .mobile-menu-btn { display: block; }
+        }
+        
+        @media (max-width: 700px) {
+            .container { padding: 1rem 2vw 2rem 2vw; }
+            .hero { font-size: 1.1em; }
+            .price-card { padding: 1.2rem 0.7rem 1rem 0.7rem; }
+            .category-title { font-size: 1.1rem; }
+            .whatsapp-float { right: 10px; bottom: 10px; }
+            #introSplash h1 { font-size: 1.3em; }
+            #introSplash p { font-size: 1em; }
+            .hero h1 { font-size: 2rem; }
+            .discount-banner { top: 70px; }
+            .footer-content { grid-template-columns: 1fr; }
+            #musicPlayer { display: none; } /* Hide music on small mobile to save space */
+        }
+        
+        @media (max-width: 480px) {
+            html, body { font-size: 15px; }
+            .container { padding: 0.5rem 1vw 1rem 1vw; }
+            .hero { font-size: 1em; }
+            .price-card { padding: 0.7rem 0.3rem 0.7rem 0.3rem; }
+            .category-title { font-size: 1em; }
+            .whatsapp-btn { font-size: 0.98em; padding: 10px 12px; }
+            #introSplash .luxury-logo { font-size: 2em; }
+            #introSplash h1 { font-size: 1em; }
+            #introSplash p { font-size: 0.95em; }
+            #introSplash .intro-bar { width: 140px; height: 10px; }
+            .hero h1 { font-size: 1.5rem; }
+            .discount-banner { top: 60px; }
+            .logo img { height: 40px; }
+            .logo span { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body class="intro-active">
@@ -1442,16 +1394,16 @@
             </div>
             <h1>HACK STORE JOKI BLOX FRUITS</h1>
             <p>
-                <span style="color:var(--accent);font-weight:bold;">VIP Service</span> | <span style="color:var(--primary);">Fast</span> | <span style="color:var(--secondary);">Trusted</span>
+                <span style="color:var(--accent);font-weight:bold;">VIP Service</span> | <span style="color:var(--success);">Promo 25%</span> | <span style="color:var(--primary);">Trusted</span>
                 <br>
-                <span style="font-size:1.08em;">Rasakan pengalaman joki <b>premium</b> dengan pelayanan <b>eksklusif</b>, harga terjangkau, dan keamanan maksimal.<br>
+                <span style="font-size:1.08em;">Rasakan pengalaman joki <b>premium</b> dengan harga <b>TERMURAH</b>, kualitas terjamin, dan keamanan maksimal.<br>
                 <span style="color:var(--accent);">Order sekarang dan buktikan sendiri kemewahan layanan kami!</span></span>
             </p>
             <div class="intro-bar"><div class="intro-bar-inner"></div></div>
         </div>
     </div>
 
-    <!-- TAMBAHAN: MUSIC PLAYER HTML -->
+    <!-- MUSIC PLAYER HTML -->
     <audio id="bgMusic" loop>
         <source src="https://files.catbox.moe/ofcub9.mp3" type="audio/mp3">
     </audio>
@@ -1490,28 +1442,10 @@
         </div>
     </header>
     
-    <!-- Discount Banner -->
+    <!-- Banner Text (UPDATED FOR PROMO) -->
     <div class="discount-banner">
-        <h3><i class="fas fa-fire"></i> DISKON 50% SEMUA LAYANAN! <i class="fas fa-fire"></i></h3>
-        <p>Berlaku hingga 29 Desember 2023</p>
-        <div class="countdown">
-            <div class="countdown-item">
-                <div class="countdown-value" id="days">00</div>
-                <div class="countdown-label">Hari</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-value" id="hours">00</div>
-                <div class="countdown-label">Jam</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-value" id="minutes">00</div>
-                <div class="countdown-label">Menit</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-value" id="seconds">00</div>
-                <div class="countdown-label">Detik</div>
-            </div>
-        </div>
+        <h3><i class="fas fa-percent"></i> PROMO SPESIAL: HEMAT 25% <i class="fas fa-percent"></i></h3>
+        <p>Harga paling murah dengan kualitas terbaik. Waktunya order!</p>
     </div>
     
     <div id="mainContent" style="display:none;">
@@ -1607,7 +1541,7 @@
                         <h3><i class="fas fa-trophy"></i> Keunggulan</h3>
                         <ul>
                             <li>Pengerjaan cepat dan tepat waktu</li>
-                            <li>Harga terjangkau dengan kualitas premium</li>
+                            <li>Harga termurah di pasaran</li>
                             <li>Layanan 24 jam non-stop</li>
                             <li>Garansi kepuasan pelanggan</li>
                         </ul>
@@ -1624,90 +1558,78 @@
                 </div>
             </section>
             
-            <!-- Game Section -->
-            <section style="text-align: center; margin: 3rem 0;">
-                <h2 class="section-title">Coba Game Buatan Kami!</h2>
-                <iframe frameborder="0" 
-                    src="https://itch.io/embed/3386290?border_width=0&amp;border_color=000000" 
-                    width="550" height="165"
-                    style="max-width: 98vw; border-radius: 10px; box-shadow: var(--shadow);">
-                    <a href="https://xobe-development.itch.io/tebakx-the-ultimate-number-challenge">
-                        TebakX by XOBE DEVELOPMENT
-                    </a>
-                </iframe>
-            </section>
-            
             <!-- Services Section -->
             <section id="services">
                 <h2 class="section-title">LAYANAN KAMI</h2>
                 
-                <!-- Level Joki -->
+                <!-- Level Joki (UPDATED PRICES -25%) -->
                 <div class="price-grid">
                     <div class="price-card interactive-card">
-                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title"><i class="fas fa-level-up-alt"></i> JOKI LEVEL</h3>
-                        <div class="price-item"><span>Level 100</span><span>2.5K</span></div>
-                        <div class="price-item"><span>Level 200</span><span>4K</span></div>
-                        <div class="price-item"><span>Level 300</span><span>5.5K</span></div>
-                        <div class="price-item"><span>Level 400</span><span>7K</span></div>
-                        <div class="price-item"><span>Level 500</span><span>8.5K</span></div>
-                        <div class="price-item"><span>Level 600</span><span>10K</span></div>
-                        <div class="price-item"><span>Level 700</span><span>11.5K</span></div>
-                        <div class="price-item"><span>Level 800</span><span>13K</span></div>
-                        <div class="price-item"><span>Level 900</span><span>14.5K</span></div>
-                        <div class="price-item"><span>Level 1000</span><span>16K</span></div>
-                        <div class="price-item"><span>Level 1100</span><span>17.5K</span></div>
-                        <div class="price-item"><span>Level 1200</span><span>19K</span></div>
-                        <div class="price-item"><span>Level 1300</span><span>20.5K</span></div>
-                        <div class="price-item"><span>Level 1400</span><span>22K</span></div>
-                        <div class="price-item"><span>Level 1500</span><span>23.5K</span></div>
-                        <div class="price-item"><span>Level 1600</span><span>25K</span></div>
-                        <div class="price-item"><span>Level 1700</span><span>26.5K</span></div>
-                        <div class="price-item"><span>Level 1800</span><span>28K</span></div>
-                        <div class="price-item"><span>Level 1900</span><span>29.5K</span></div>
-                        <div class="price-item"><span>Level 2000</span><span>31K</span></div>
-                        <div class="price-item"><span>Level 2100</span><span>32.5K</span></div>
-                        <div class="price-item"><span>Level 2200</span><span>34K</span></div>
-                        <div class="price-item"><span>Level 2300</span><span>35.5K</span></div>
-                        <div class="price-item"><span>Level 2400</span><span>37K</span></div>
-                        <div class="price-item"><span>Level 2450</span><span>38.5K</span></div>
-                        <div class="price-item"><span>Level 2500</span><span>40K</span></div>
-                        <div class="price-item"><span>Level 2600</span><span>42.5K</span></div>
-                        <div class="price-item"><span>Level 2700</span><span>45K</span></div>
-                        <div class="price-item"><span>Level 2800 (MAX)</span><span>47.5K</span></div>
+                        <div class="price-item"><span>Level 100</span><span>4K</span></div>
+                        <div class="price-item"><span>Level 200</span><span>6K</span></div>
+                        <div class="price-item"><span>Level 300</span><span>8K</span></div>
+                        <div class="price-item"><span>Level 400</span><span>10K</span></div>
+                        <div class="price-item"><span>Level 500</span><span>13K</span></div>
+                        <div class="price-item"><span>Level 600</span><span>15K</span></div>
+                        <div class="price-item"><span>Level 700</span><span>17K</span></div>
+                        <div class="price-item"><span>Level 800</span><span>19K</span></div>
+                        <div class="price-item"><span>Level 900</span><span>22K</span></div>
+                        <div class="price-item"><span>Level 1000</span><span>24K</span></div>
+                        <div class="price-item"><span>Level 1100</span><span>26K</span></div>
+                        <div class="price-item"><span>Level 1200</span><span>28K</span></div>
+                        <div class="price-item"><span>Level 1300</span><span>31K</span></div>
+                        <div class="price-item"><span>Level 1400</span><span>33K</span></div>
+                        <div class="price-item"><span>Level 1500</span><span>35K</span></div>
+                        <div class="price-item"><span>Level 1600</span><span>37K</span></div>
+                        <div class="price-item"><span>Level 1700</span><span>40K</span></div>
+                        <div class="price-item"><span>Level 1800</span><span>42K</span></div>
+                        <div class="price-item"><span>Level 1900</span><span>44K</span></div>
+                        <div class="price-item"><span>Level 2000</span><span>46K</span></div>
+                        <div class="price-item"><span>Level 2100</span><span>49K</span></div>
+                        <div class="price-item"><span>Level 2200</span><span>51K</span></div>
+                        <div class="price-item"><span>Level 2300</span><span>53K</span></div>
+                        <div class="price-item"><span>Level 2400</span><span>55K</span></div>
+                        <div class="price-item"><span>Level 2450</span><span>58K</span></div>
+                        <div class="price-item"><span>Level 2500</span><span>60K</span></div>
+                        <div class="price-item"><span>Level 2600</span><span>64K</span></div>
+                        <div class="price-item"><span>Level 2700</span><span>67K</span></div>
+                        <div class="price-item"><span>Level 2800 (MAX)</span><span>71K</span></div>
                         <div class="price-detail">
                             <p>Upgrade level karakter Anda dengan cepat dan aman. Kami menggunakan metode grinding yang efisien tanpa cheat.</p>
                         </div>
                     </div>
+                    
+                    <!-- Belly Joki (UPDATED PRICES -25%) -->
                     <div class="price-card interactive-card">
-                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title"><i class="fas fa-coins"></i> JOKI BELLY</h3>
-                        <div class="price-item"><span>1M Belly</span><span>1.5K</span></div>
-                        <div class="price-item"><span>5M Belly</span><span>5K</span></div>
-                        <div class="price-item"><span>10M Belly</span><span>7.5K</span></div>
-                        <div class="price-item"><span>15M Belly</span><span>10K</span></div>
-                        <div class="price-item"><span>20M Belly</span><span>12.5K</span></div>
-                        <div class="price-item"><span>30M Belly</span><span>17.5K</span></div>
-                        <div class="price-item"><span>40M Belly</span><span>22.5K</span></div>
-                        <div class="price-item"><span>50M Belly</span><span>27.5K</span></div>
-                        <div class="price-item"><span>60M Belly</span><span>32.5K</span></div>
-                        <div class="price-item"><span>70M Belly</span><span>37.5K</span></div>
-                        <div class="price-item"><span>80M Belly</span><span>42.5K</span></div>
-                        <div class="price-item"><span>90M Belly</span><span>47.5K</span></div>
-                        <div class="price-item"><span>100M Belly</span><span>52.5K</span></div>
+                        <div class="price-item"><span>1M Belly</span><span>2K</span></div>
+                        <div class="price-item"><span>5M Belly</span><span>7K</span></div>
+                        <div class="price-item"><span>10M Belly</span><span>11K</span></div>
+                        <div class="price-item"><span>15M Belly</span><span>15K</span></div>
+                        <div class="price-item"><span>20M Belly</span><span>19K</span></div>
+                        <div class="price-item"><span>30M Belly</span><span>26K</span></div>
+                        <div class="price-item"><span>40M Belly</span><span>34K</span></div>
+                        <div class="price-item"><span>50M Belly</span><span>41K</span></div>
+                        <div class="price-item"><span>60M Belly</span><span>49K</span></div>
+                        <div class="price-item"><span>70M Belly</span><span>56K</span></div>
+                        <div class="price-item"><span>80M Belly</span><span>64K</span></div>
+                        <div class="price-item"><span>90M Belly</span><span>71K</span></div>
+                        <div class="price-item"><span>100M Belly</span><span>79K</span></div>
                         <div class="price-detail">
                             <p>Dapatkan Belly (in-game currency) dalam jumlah besar untuk membeli item, senjata, dan upgrade karakter Anda.</p>
                         </div>
                     </div>
+                    
+                    <!-- Fragmen Joki (UPDATED PRICES -25%) -->
                     <div class="price-card interactive-card">
-                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title"><i class="fas fa-gem"></i> JOKI FRAGMEN</h3>
-                        <div class="price-item"><span>3.000 Fragmen</span><span>2.5K</span></div>
-                        <div class="price-item"><span>5.000 Fragmen</span><span>2.5K</span></div>
-                        <div class="price-item"><span>10.000 Fragmen</span><span>5K</span></div>
-                        <div class="price-item"><span>15.000 Fragmen</span><span>5K</span></div>
-                        <div class="price-item"><span>20.000 Fragmen</span><span>7.5K</span></div>
-                        <div class="price-item"><span>50.000 Fragmen</span><span>15K</span></div>
+                        <div class="price-item"><span>3.000 Fragmen</span><span>4K</span></div>
+                        <div class="price-item"><span>5.000 Fragmen</span><span>4K</span></div>
+                        <div class="price-item"><span>10.000 Fragmen</span><span>7K</span></div>
+                        <div class="price-item"><span>15.000 Fragmen</span><span>7K</span></div>
+                        <div class="price-item"><span>20.000 Fragmen</span><span>11K</span></div>
+                        <div class="price-item"><span>50.000 Fragmen</span><span>22K</span></div>
                         <div class="price-item note">
                             <small>📌 Pastikan memiliki banyak fruit jelek untuk ditukar menjadi chip</small>
                         </div>
@@ -1717,105 +1639,98 @@
                     </div>
                 </div>
                 
-                <!-- Mastery Sword -->
+                <!-- Mastery Sword (UPDATED PRICES -25%) -->
                 <h2 class="category-title"><i class="fas fa-swords"></i> JOKI MASTERY SWORD</h2>
                 <div class="price-grid">
                     <div class="price-card interactive-card">
-                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title">Mastery 100-200</h3>
-                        <div class="price-item"><span>Saber</span><span>2.5K</span></div>
-                        <div class="price-item"><span>Rengoku</span><span>2.5K</span></div>
-                        <div class="price-item"><span>Shisui</span><span>2.5K</span></div>
-                        <div class="price-item"><span>Wando</span><span>2.5K</span></div>
-                        <div class="price-item"><span>Spikey Trident</span><span>2.5K</span></div>
-                        <div class="price-item"><span>Gravity Cane</span><span>2.5K</span></div>
-                        <div class="price-item"><span>Twin Hooks</span><span>2.5K</span></div>
+                        <div class="price-item"><span>Saber</span><span>4K</span></div>
+                        <div class="price-item"><span>Rengoku</span><span>4K</span></div>
+                        <div class="price-item"><span>Shisui</span><span>4K</span></div>
+                        <div class="price-item"><span>Wando</span><span>4K</span></div>
+                        <div class="price-item"><span>Spikey Trident</span><span>4K</span></div>
+                        <div class="price-item"><span>Gravity Cane</span><span>4K</span></div>
+                        <div class="price-item"><span>Twin Hooks</span><span>4K</span></div>
                         <div class="price-detail">
                             <p>Tingkatkan mastery senjata Anda untuk membuka skill dan damage yang lebih tinggi.</p>
                         </div>
                     </div>
                     <div class="price-card interactive-card">
-                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title">Mastery 200-400</h3>
-                        <div class="price-item"><span>Dark Dagger</span><span>2.5K</span></div>
-                        <div class="price-item"><span>Tushita</span><span>5K</span></div>
-                        <div class="price-item"><span>Yama</span><span>5K</span></div>
-                        <div class="price-item"><span>Buddy Sword</span><span>5K</span></div>
-                        <div class="price-item"><span>Hallow Scythe</span><span>5K</span></div>
-                        <div class="price-item"><span>True Triple Katana</span><span>5K</span></div>
-                        <div class="price-item"><span>Cursed Dual Katana</span><span>7.5K</span></div>
+                        <div class="price-item"><span>Dark Dagger</span><span>4K</span></div>
+                        <div class="price-item"><span>Tushita</span><span>7K</span></div>
+                        <div class="price-item"><span>Yama</span><span>7K</span></div>
+                        <div class="price-item"><span>Buddy Sword</span><span>7K</span></div>
+                        <div class="price-item"><span>Hallow Scythe</span><span>7K</span></div>
+                        <div class="price-item"><span>True Triple Katana</span><span>7K</span></div>
+                        <div class="price-item"><span>Cursed Dual Katana</span><span>11K</span></div>
                         <div class="price-detail">
                             <p>Mastery tinggi untuk senjata langka yang memberikan keuntungan signifikan dalam pertarungan.</p>
                         </div>
                     </div>
                     <div class="price-card interactive-card">
-                        <div class="discount-badge">50% OFF</div>
                         <h3 class="category-title">Mastery 400-600</h3>
-                        <div class="price-item"><span>Midnight Blade</span><span>5K</span></div>
-                        <div class="price-item"><span>Pole (2nd Form)</span><span>7.5K</span></div>
-                        <div class="price-item"><span>Cursed Dual Katana</span><span>10K</span></div>
-                        <div class="price-item"><span>True Triple Katana</span><span>10K</span></div>
-                        <div class="price-item"><span>Hallow Scythe</span><span>7.5K</span></div>
+                        <div class="price-item"><span>Midnight Blade</span><span>7K</span></div>
+                        <div class="price-item"><span>Pole (2nd Form)</span><span>11K</span></div>
+                        <div class="price-item"><span>Cursed Dual Katana</span><span>15K</span></div>
+                        <div class="price-item"><span>True Triple Katana</span><span>15K</span></div>
+                        <div class="price-item"><span>Hallow Scythe</span><span>11K</span></div>
                         <div class="price-detail">
                             <p>Mastery maksimal untuk senjata terkuat dalam game. Damage dan skill yang luar biasa.</p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Awakening Fruit -->
+                <!-- Awakening Fruit (UPDATED PRICES -25%) -->
                 <h2 class="category-title"><i class="fas fa-fire"></i> JOKI AWAKENING FRUIT</h2>
                 <div class="price-grid">
                     <div class="price-card interactive-card">
-                        <div class="discount-badge">50% OFF</div>
-                        <div class="price-item"><span>Ice Awakened</span><span>7.5K</span></div>
-                        <div class="price-item"><span>Flame Awakened</span><span>7.5K</span></div>
-                        <div class="price-item"><span>Light Awakened</span><span>7.5K</span></div>
-                        <div class="price-item"><span>Quake Awakened</span><span>10K</span></div>
-                        <div class="price-item"><span>Dark Awakened</span><span>7.5K</span></div>
-                        <div class="price-item"><span>Sand Awakened</span><span>7.5K</span></div>
+                        <div class="price-item"><span>Ice Awakened</span><span>11K</span></div>
+                        <div class="price-item"><span>Flame Awakened</span><span>11K</span></div>
+                        <div class="price-item"><span>Light Awakened</span><span>11K</span></div>
+                        <div class="price-item"><span>Quake Awakened</span><span>15K</span></div>
+                        <div class="price-item"><span>Dark Awakened</span><span>11K</span></div>
+                        <div class="price-item"><span>Sand Awakened</span><span>11K</span></div>
                         <div class="price-detail">
                             <p>Awakening Fruit untuk membuka potensi penuh dari kemampuan buah Anda.</p>
                         </div>
                     </div>
                     <div class="price-card interactive-card">
-                        <div class="discount-badge">50% OFF</div>
-                        <div class="price-item"><span>Magma Awakened</span><span>10K</span></div>
-                        <div class="price-item"><span>Rumble Awakened</span><span>12.5K</span></div>
-                        <div class="price-item"><span>Phoenix Awakened</span><span>12.5K</span></div>
-                        <div class="price-item"><span>String Awakened</span><span>12.5K</span></div>
-                        <div class="price-item"><span>Dough Awakened</span><span>20K</span></div>
+                        <div class="price-item"><span>Magma Awakened</span><span>15K</span></div>
+                        <div class="price-item"><span>Rumble Awakened</span><span>19K</span></div>
+                        <div class="price-item"><span>Phoenix Awakened</span><span>19K</span></div>
+                        <div class="price-item"><span>String Awakened</span><span>19K</span></div>
+                        <div class="price-item"><span>Dough Awakened</span><span>30K</span></div>
                         <div class="price-detail">
                             <p>Awakening untuk buah langka dengan kemampuan unik dan damage tinggi.</p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Fighting Style -->
+                <!-- Fighting Style (UPDATED PRICES -25%) -->
                 <h2 class="category-title"><i class="fas fa-fist-raised"></i> JOKI FIGHTING STYLE</h2>
                 <div class="price-grid">
                     <div class="price-card interactive-card">
-                        <div class="discount-badge">50% OFF</div>
-                        <div class="price-item"><span>Death Step</span><span>2.5K</span></div>
-                        <div class="price-item"><span>Electric Claw</span><span>5K</span></div>
-                        <div class="price-item"><span>Sharkman Karate</span><span>5K</span></div>
-                        <div class="price-item"><span>Superhuman</span><span>5K</span></div>
-                        <div class="price-item"><span>God Human</span><span>7.5K</span></div>
-                        <div class="price-item"><span>Dragon Talon (Tanpa Essence)</span><span>4K</span></div>
-                        <div class="price-item"><span>Dragon Talon (Dengan Essence)</span><span>7.5K</span></div>
+                        <div class="price-item"><span>Death Step</span><span>4K</span></div>
+                        <div class="price-item"><span>Electric Claw</span><span>7K</span></div>
+                        <div class="price-item"><span>Sharkman Karate</span><span>7K</span></div>
+                        <div class="price-item"><span>Superhuman</span><span>7K</span></div>
+                        <div class="price-item"><span>God Human</span><span>11K</span></div>
+                        <div class="price-item"><span>Dragon Talon (Tanpa Essence)</span><span>6K</span></div>
+                        <div class="price-item"><span>Dragon Talon (Dengan Essence)</span><span>11K</span></div>
                         <div class="price-detail">
                             <p>Kuasai gaya bertarung terkuat dalam game untuk meningkatkan kemampuan bertarung karakter Anda.</p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Race -->
+                <!-- Race (UPDATED PRICES -25%) -->
                 <h2 class="category-title"><i class="fas fa-running"></i> JOKI RACE</h2>
                 <div class="price-grid">
                     <div class="price-card interactive-card">
-                        <div class="discount-badge">50% OFF</div>
-                        <div class="price-item"><span>Upgrade Race ke V2</span><span>2.5K</span></div>
-                        <div class="price-item"><span>Upgrade Race ke V3</span><span>5K</span></div>
-                        <div class="price-item"><span>Upgrade Race ke V4</span><span>20K</span></div>
+                        <div class="price-item"><span>Upgrade Race ke V2</span><span>4K</span></div>
+                        <div class="price-item"><span>Upgrade Race ke V3</span><span>7K</span></div>
+                        <div class="price-item"><span>Upgrade Race ke V4</span><span>30K</span></div>
                         <div class="price-detail">
                             <p>Upgrade ras karakter Anda untuk membuka kemampuan dan bonus statistik yang lebih baik.</p>
                         </div>
@@ -1834,19 +1749,124 @@
                 </ul>
             </section>
             
-            <!-- Why Choose Us -->
-            <section class="why-choose-section">
-                <h3 class="category-title"><i class="fas fa-star"></i> KENAPA HARUS JOKI DI SINI?</h3>
-                <div class="price-grid">
+            <!-- CALCULATOR SECTION -->
+            <section id="calculator" class="order-form-card calculator-card">
+                <h2 class="category-title"><i class="fas fa-calculator"></i> KALKULATOR HARGA</h2>
+                <div class="calc-grid">
                     <div>
-                        <div class="price-item"><span><i class="fas fa-bolt"></i> Cepat</span><span>Pengerjaan kilat</span></div>
-                        <div class="price-item"><span><i class="fas fa-shield-alt"></i> Aman</span><span>Tanpa password</span></div>
+                        <label style="color:var(--primary); font-weight:600;">Pilih Layanan</label>
+                        <select id="calcService" onchange="calculatePrice()" style="width:100%; padding:10px; border-radius:8px; background:rgba(15,23,42,0.8); border:1px solid var(--border); color:white; margin-bottom:10px;">
+                            <option value="level">Joki Level</option>
+                            <option value="belly">Joki Belly</option>
+                            <option value="fragmen">Joki Fragmen</option>
+                        </select>
+                        <label style="color:var(--primary); font-weight:600;">Jumlah / Target</label>
+                        <input type="number" id="calcAmount" value="100" oninput="calculatePrice()" style="width:100%; padding:10px; border-radius:8px; background:rgba(15,23,42,0.8); border:1px solid var(--border); color:white;">
+                        <small style="color:var(--text-secondary); font-size:0.8rem; display:block; margin-top:5px;">Contoh: Level 100 (Input 100) atau 10M Belly (Input 10)</small>
                     </div>
-                    <div>
-                        <div class="price-item"><span><i class="fas fa-clock"></i> Efisien</span><span>Kamu santai</span></div>
-                        <div class="price-item"><span><i class="fas fa-hourglass-half"></i> Hemat Waktu</span><span>Tak perlu grinding</span></div>
+                    <div class="calc-result-box">
+                        <div style="font-size:0.9rem; color:var(--text-secondary);">Estimasi Total</div>
+                        <div class="calc-total" id="calcTotal">Rp 0</div>
+                        <small style="color:var(--text-secondary);">*Harga Promo 25%</small>
                     </div>
                 </div>
+            </section>
+            
+            <!-- NEW ORDER FORM (Structured & Safe) -->
+            <section id="order" class="order-form-card">
+                <div class="order-header">
+                    <h2><i class="fas fa-clipboard-check"></i> FORMULIR ORDER</h2>
+                    <div class="order-security-badge">
+                        <i class="fas fa-lock"></i> Transaksi Aman & Terpercaya
+                    </div>
+                </div>
+
+                <div class="otp-reminder">
+                    <i class="fas fa-info-circle" style="color:var(--accent); margin-top:3px;"></i>
+                    <div>
+                        <strong>Penting:</strong> Kami tidak meminta password akun Roblox Anda. Pengerjaan hanya membutuhkan akses <b>Kode OTP</b> yang dikirim ke email terdaftar.
+                    </div>
+                </div>
+
+                <form id="orderForm">
+                    <div class="order-grid">
+                        <!-- Kolom Kiri: Data Pelanggan -->
+                        <div class="form-column">
+                            <div class="form-section-title">
+                                <i class="fas fa-user-circle"></i> Data Pelanggan
+                            </div>
+                            
+                            <div class="input-group">
+                                <label style="color: var(--text-primary); font-size: 0.9rem; margin-bottom: 5px; display:block;">Nama Lengkap</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="customerName" placeholder="Nama Anda" required tabindex="1">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label style="color: var(--text-primary); font-size: 0.9rem; margin-bottom: 5px; display:block;">Nomor WhatsApp</label>
+                                <div class="input-wrapper">
+                                    <input type="tel" id="contact" placeholder="08xx-xxxx-xxxx" required tabindex="2">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label style="color: var(--text-primary); font-size: 0.9rem; margin-bottom: 5px; display:block;">Email Roblox (Untuk OTP)</label>
+                                <div class="input-wrapper">
+                                    <input type="email" id="emailRoblox" placeholder="email@anda.com" required tabindex="3">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <small style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px; display:block;">Pastikan email aktif & dapat diakses.</small>
+                            </div>
+                        </div>
+
+                        <!-- Kolom Kanan: Detail Order -->
+                        <div class="form-column">
+                            <div class="form-section-title">
+                                <i class="fas fa-shopping-bag"></i> Detail Layanan
+                            </div>
+
+                            <div class="input-group">
+                                <label style="color: var(--text-primary); font-size: 0.9rem; margin-bottom: 5px; display:block;">Jenis Joki</label>
+                                <div class="input-wrapper">
+                                    <select id="serviceType" required tabindex="4">
+                                        <option value="" disabled selected>Pilih Layanan...</option>
+                                        <option value="Joki Level">Joki Level</option>
+                                        <option value="Joki Belly">Joki Belly</option>
+                                        <option value="Joki Fragmen">Joki Fragmen</option>
+                                        <option value="Joki Mastery Sword">Joki Mastery Sword</option>
+                                        <option value="Joki Awakening Fruit">Joki Awakening Fruit</option>
+                                        <option value="Joki Fighting Style">Joki Fighting Style</option>
+                                        <option value="Joki Race">Joki Race</option>
+                                    </select>
+                                    <i class="fas fa-list"></i>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label style="color: var(--text-primary); font-size: 0.9rem; margin-bottom: 5px; display:block;">Spesifikasi Order</label>
+                                <div class="input-wrapper">
+                                    <textarea id="details" placeholder="Contoh: Level 1000, Saber V2, Dough V1, dll" required tabindex="5"></textarea>
+                                    <i class="fas fa-edit" style="top: 14px;"></i>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label style="color: var(--text-primary); font-size: 0.9rem; margin-bottom: 5px; display:block;">Catatan Tambahan (Opsional)</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="notes" placeholder="Misal: Jangan pakai race ghoul" tabindex="6">
+                                    <i class="fas fa-sticky-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit">
+                        <i class="fas fa-paper-plane"></i> Kirim Order ke WhatsApp
+                    </button>
+                </form>
             </section>
             
             <!-- Testimonials -->
@@ -1886,64 +1906,6 @@
                 </div>
             </section>
             
-            <!-- TAMBAHAN: CALCULATOR SECTION -->
-            <section id="calculator" class="order-form-card calculator-card">
-                <h2 class="category-title"><i class="fas fa-calculator"></i> KALKULATOR HARGA</h2>
-                <div class="calc-grid">
-                    <div>
-                        <label style="color:var(--primary); font-weight:600;">Pilih Layanan</label>
-                        <select id="calcService" onchange="calculatePrice()" style="width:100%; padding:10px; border-radius:8px; background:rgba(15,23,42,0.8); border:1px solid var(--border); color:white; margin-bottom:10px;">
-                            <option value="level">Joki Level</option>
-                            <option value="belly">Joki Belly</option>
-                            <option value="fragmen">Joki Fragmen</option>
-                        </select>
-                        <label style="color:var(--primary); font-weight:600;">Jumlah / Target</label>
-                        <input type="number" id="calcAmount" value="100" oninput="calculatePrice()" style="width:100%; padding:10px; border-radius:8px; background:rgba(15,23,42,0.8); border:1px solid var(--border); color:white;">
-                        <small style="color:var(--text-secondary); font-size:0.8rem; display:block; margin-top:5px;">Contoh: Level 100 (Input 100) atau 10M Belly (Input 10)</small>
-                    </div>
-                    <div class="calc-result-box">
-                        <div style="font-size:0.9rem; color:var(--text-secondary);">Estimasi Total</div>
-                        <div class="calc-total" id="calcTotal">Rp 0</div>
-                        <small style="color:var(--text-secondary);">*Hanya estimasi, harga pasti cek WA</small>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Order Form -->
-            <section id="order" class="order-form-card">
-                <h2 class="category-title"><i class="fas fa-shopping-cart"></i> FORM ORDER</h2>
-                <form id="orderForm">
-                    <div>
-                        <label for="customerName">Nama Pelanggan:</label>
-                        <input type="text" id="customerName" name="customerName" placeholder="Masukkan nama Anda" required tabindex="1">
-                    </div>
-                    <div>
-                        <label for="serviceType">Pilih Jenis Joki:</label>
-                        <select id="serviceType" name="serviceType" required tabindex="2">
-                            <option value="" disabled selected>Pilih layanan...</option>
-                            <option value="Joki Level">Joki Level</option>
-                            <option value="Joki Belly">Joki Belly</option>
-                            <option value="Joki Fragmen">Joki Fragmen</option>
-                            <option value="Joki Mastery Sword">Joki Mastery Sword</option>
-                            <option value="Joki Awakening Fruit">Joki Awakening Fruit</option>
-                            <option value="Joki Fighting Style">Joki Fighting Style</option>
-                            <option value="Joki Race">Joki Race</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="details">Detail Layanan:</label>
-                        <textarea id="details" name="details" placeholder="Masukkan detail layanan (contoh: Level 1000, 10M Belly, Saber, V3, dll)" required></textarea>
-                        <small>Contoh detail: "Level 1000", "10M Belly", "Saber", "V3", dsb. Info lengkap bisa chat WA.</small>
-                    </div>
-                    <div>
-                        <label for="contact">Nomor WhatsApp:</label>
-                        <input type="text" id="contact" name="contact" placeholder="Masukkan nomor WhatsApp Anda" required>
-                    </div>
-                    <small>📌 Harga akan diinformasikan saat chat melalui WhatsApp.</small>
-                    <button type="submit">Kirim Order</button>
-                </form>
-            </section>
-            
             <!-- Community Section -->
             <section id="community" class="community">
                 <h2 class="section-title">GABUNG KOMUNITAS KAMI</h2>
@@ -1957,7 +1919,6 @@
                         <i class="fab fa-whatsapp"></i>
                         <span>Grup Hack Store V2</span>
                     </a>
-                    <!-- UPDATED: Link Testimoni ke Telegram + Icon Update -->
                     <a href="https://t.me/+DjyfbA7vI90xZmFl" target="_blank" class="community-link" style="border-color: #0088cc; background: rgba(0, 136, 204, 0.1);">
                         <i class="fab fa-telegram" style="color: #0088cc;"></i>
                         <span>Channel Testimoni</span>
@@ -1970,25 +1931,18 @@
                 <h3>📞 HUBUNGI KAMI SEKARANG!</h3>
                 <p>Setiap penjoki hanya menerima 2-3 orderan saja!</p>
                 <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
-                    <a href="https://wa.me/6283169934938" style="background: var(--secondary); padding: 12px 24px; border-radius: 50px; color: white; text-decoration: none; font-weight: 500;">
-                        <i class="fab fa-whatsapp"></i> Admin 1 (Fast Response)
-                    </a>
-                    <a href="https://wa.me/6281258837595" style="background: var(--primary); padding: 12px 24px; border-radius: 50px; color: white; text-decoration: none; font-weight: 500;">
-                        <i class="fab fa-whatsapp"></i> Admin 2 (Slow Response)
+                    <a href="https://wa.me/6281299249650" style="background: var(--secondary); padding: 12px 24px; border-radius: 50px; color: white; text-decoration: none; font-weight: 500;">
+                        <i class="fab fa-whatsapp"></i> Admin Utama (Fast Response)
                     </a>
                 </div>
             </section>
         </div>
         
-        <!-- WhatsApp Floating Button -->
+        <!-- WhatsApp Floating Button (UPDATED NUMBER) -->
         <div class="whatsapp-float">
-            <a href="https://wa.me/6283870312952" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i> Admin 1 (Fast)
+            <a href="https://wa.me/6281299249650" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Admin Utama
             </a>
-            <a href="https://wa.me/6281258837595" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i> Admin 2 (Slow)
-            </a>
-            <!-- UPDATED: Link Testimoni ke Telegram + Icon Update + Style Update -->
             <a href="https://t.me/+DjyfbA7vI90xZmFl" class="whatsapp-btn" style="background: linear-gradient(135deg,#0088cc,#229ED9);color:white;font-weight:bold;" target="_blank">
                 <i class="fab fa-telegram"></i> Channel Testimoni
             </a>
@@ -2012,7 +1966,6 @@
             <div class="notification-message">Pesan notifikasi</div>
         </div>
         
-        <!-- UPDATED: Fixed typo 'hhttps' to 'https' -->
         <div style="text-align:center;margin:2.5rem 0 1.5rem 0;">
             <a href="https://t.me/+DjyfbA7vI90xZmFl" target="_blank" style="display:inline-block;background:linear-gradient(90deg,var(--telegram-blue),var(--success));color:var(--darker);font-weight:600;padding:16px 32px;border-radius:32px;font-size:1.15em;text-decoration:none;box-shadow:var(--shadow);">
                 ⭐ Lihat Testimoni & Bukti Real Order di Channel Telegram Kami!<br>
@@ -2030,7 +1983,7 @@
                             <span>HACK STORE</span>
                         </div>
                         <p style="color: var(--text-secondary); margin-top: 1rem;">
-                            Professional BloxFruits Joki Service sejak 2018. Menyediakan layanan joki terpercaya dengan kualitas premium.
+                            Professional BloxFruits Joki Service sejak 2018. Menyediakan layanan joki terpercaya dengan kualitas premium dan harga termurah.
                         </p>
                     </div>
                     <div class="footer-section">
@@ -2056,9 +2009,7 @@
                     <div class="footer-section">
                         <h3>Kontak</h3>
                         <ul>
-                            <li><a href="https://wa.me/6283169934938"><i class="fab fa-whatsapp"></i> Admin 1</a></li>
-                            <li><a href="https://wa.me/6281258837595"><i class="fab fa-whatsapp"></i> Admin 2</a></li>
-                            <!-- UPDATED: Icon Update for Telegram link -->
+                            <li><a href="https://wa.me/6281299249650"><i class="fab fa-whatsapp"></i> Admin Utama</a></li>
                             <li><a href="https://t.me/+DjyfbA7vI90xZmFl"><i class="fab fa-telegram"></i> Channel Testimoni</a></li>
                         </ul>
                     </div>
@@ -2071,9 +2022,10 @@
     </div>
     
     <script>
-        // --- TAMBAHAN SCRIPT BARU (MUSIC & CALCULATOR) ---
-        
-        // 1. Music Player Logic
+        // --- CONFIGURATION ---
+        const ADMIN_WA_NUMBER = "6281299249650"; // NOMOR BARU ADMIN 1
+
+        // --- MUSIC PLAYER LOGIC ---
         const bgMusic = document.getElementById('bgMusic');
         const musicIcon = document.getElementById('musicIcon');
         const equalizer = document.getElementById('equalizer');
@@ -2094,39 +2046,31 @@
             isPlaying = !isPlaying;
         }
 
-        // 2. Calculator Logic
+        // --- CALCULATOR LOGIC (UPDATED FOR -25% PRICES) ---
         function calculatePrice() {
             const service = document.getElementById('calcService').value;
             const amount = parseFloat(document.getElementById('calcAmount').value) || 0;
             let price = 0;
 
-            // Harga dasar berdasarkan list harga asli (Diskon 50% sudah diterapkan di list)
-            // Level: 100 = 2.5K (25/level), 1000 = 16K (16/level), 2500 = 40K (16/level)
-            // Belly: 1M = 1.5K
-            // Fragmen: 10k = 5K (0.5/fragmen)
-
+            // New Promo Prices (Approx -25%)
             if (service === 'level') {
-                // Menggunakan rata-rata estimasi untuk kalkulator sederhana
-                if(amount <= 500) price = amount * 25; // 2.5k per 100 level = 25 per level
-                else if(amount <= 1000) price = 8500 + ((amount - 500) * 15);
-                else price = 16000 + ((amount - 1000) * 15);
+                // Logic harga level baru
+                if(amount <= 500) price = amount * 40; // 4k per 100 level
+                else if(amount <= 1000) price = 20000 + ((amount - 500) * 22); 
+                else price = 31000 + ((amount - 1000) * 25);
             } else if (service === 'belly') {
-                price = amount * 1500; // Input dalam 'Juta', harga 1.5k per Juta
+                price = amount * 2000; // 2k per 1M (was 3k)
             } else if (service === 'fragmen') {
-                price = amount * 0.5; // Input dalam 'Ribuan', harga 5k per 10k fragmen = 0.5k per 1000
+                price = amount * 1.5; // Approx logic for fragments
             }
 
             document.getElementById('calcTotal').innerText = 'Rp ' + Math.round(price).toLocaleString('id-ID');
         }
-
-        // Jalankan kalkulator sekali saat load
-        calculatePrice();
-
-
-        // --- SCRIPT ASLI TANPA PERUBAHAN ---
         
-        // Intro Splash auto close & tampilkan mainContent
+        // --- INITIALIZATION ---
         window.addEventListener('DOMContentLoaded', function() {
+            calculatePrice(); // Init calculator
+
             setTimeout(function() {
                 document.getElementById('introSplash').style.opacity = 0;
                 setTimeout(function() {
@@ -2134,7 +2078,6 @@
                     document.body.classList.remove('intro-active');
                     document.getElementById('mainContent').style.display = 'block';
                     
-                    // Hide loader
                     setTimeout(() => {
                         document.getElementById('loader').classList.add('hidden');
                     }, 500);
@@ -2142,38 +2085,9 @@
             }, 2600);
         });
 
-        // Countdown Timer
-        function updateCountdown() {
-            const targetDate = new Date('December 29, 2023 23:59:59').getTime();
-            const now = new Date().getTime();
-            const timeLeft = targetDate - now;
-            
-            if (timeLeft > 0) {
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            } else {
-                // Countdown is over
-                document.querySelector('.discount-banner h3').innerHTML = '<i class="fas fa-gift"></i> PROMO BERAKHIR <i class="fas fa-gift"></i>';
-                document.querySelector('.discount-banner p').textContent = 'Terima kasih telah berpartisipasi dalam promo kami!';
-                document.querySelector('.countdown').style.display = 'none';
-            }
-        }
-        
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call
-
-        // Animated Counter for Stats
+        // --- ANIMATED COUNTER ---
         function animateCounter() {
             const counters = document.querySelectorAll('.stat-number');
-            
             counters.forEach(counter => {
                 const target = +counter.getAttribute('data-target');
                 const count = +counter.innerText;
@@ -2188,14 +2102,8 @@
             });
         }
         
-        // Trigger counter animation when stats section is in view
         const statsSection = document.querySelector('.stats-section');
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5
-        };
-        
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.5 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2205,56 +2113,50 @@
             });
         }, observerOptions);
         
-        if (statsSection) {
-            observer.observe(statsSection);
-        }
+        if (statsSection) observer.observe(statsSection);
 
-        // Interactive Cards
-        document.querySelectorAll('.interactive-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const detail = this.querySelector('.price-detail');
-                if (detail) {
-                    detail.classList.toggle('active');
-                }
-            });
-        });
-
-        // Order Form Submission
+        // --- ORDER FORM HANDLING (UPDATED) ---
         document.getElementById('orderForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            const customerName = document.getElementById('customerName').value.trim();
-            const serviceType = document.getElementById('serviceType').value;
-            const details = document.getElementById('details').value.trim();
+            
+            // Ambil data
+            const name = document.getElementById('customerName').value.trim();
             const contact = document.getElementById('contact').value.trim();
+            const email = document.getElementById('emailRoblox').value.trim();
+            const service = document.getElementById('serviceType').value;
+            const details = document.getElementById('details').value.trim();
+            const notes = document.getElementById('notes').value.trim();
 
-            // Validasi nomor kontak
-            if (!/^08\d{8,12}$/.test(contact)) {
-                showNotification('Nomor WhatsApp tidak valid. Harus dimulai dengan 08 dan panjang 10-14 digit.', 'error');
+            // Validasi sederhana
+            if (!name || !contact || !email || !service || !details) {
+                showNotification('Mohon lengkapi semua field wajib.', 'error');
                 return;
             }
 
-            // Kirim ke WhatsApp Admin 1 (Fast Response)
-            const orderSummary = `
-Halo Admin Hack Store, saya ingin order layanan:
+            // Buat pesan WA yang Terstruktur Rapi
+            const orderMessage = `
+🛒 *FORM ORDER BARU - HACK STORE*
+------------------------------------------
+👤 *DATA PEMBELI*
+Nama: ${name}
+WhatsApp: ${contact}
+Email Roblox: ${email}
 
-Nama: ${customerName}
-Layanan: ${serviceType}
-Detail: ${details}
-Kontak: ${contact}
+🎮 *DETAIL ORDER*
+Layanan: ${service}
+Spesifikasi: ${details}
+Catatan: ${notes || '-'}
 
-Mohon segera diproses, terima kasih.
-            `;
-            const whatsappMessage = encodeURIComponent(orderSummary);
-            const whatsappURL = `https://wa.me/6283870312952?text=${whatsappMessage}`;
+------------------------------------------
+_Mohon segera diproses. Terima kasih!_
+            `.trim();
+
+            const whatsappURL = `https://wa.me/${ADMIN_WA_NUMBER}?text=${encodeURIComponent(orderMessage)}`;
             
-            // Show notification
-            showNotification('Mengalihkan ke WhatsApp...', 'info');
+            showNotification('Mengalihkan ke WhatsApp Admin...', 'info');
             
-            // Open WhatsApp after a short delay
             setTimeout(() => {
                 window.open(whatsappURL, '_blank');
-                
-                // Tampilkan modal sukses
                 document.getElementById('orderSuccessModal').style.display = 'block';
                 e.target.reset();
             }, 1000);
@@ -2264,54 +2166,51 @@ Mohon segera diproses, terima kasih.
             document.getElementById('orderSuccessModal').style.display = 'none';
         }
         
-        // Back to top button
-        const backToTopButton = document.getElementById('backToTop');
+        // --- UI INTERACTIONS ---
         
+        // Interactive Cards
+        document.querySelectorAll('.interactive-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const detail = this.querySelector('.price-detail');
+                if (detail) detail.classList.toggle('active');
+            });
+        });
+
+        // Back to Top
+        const backToTopButton = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
+            if (window.pageYOffset > 300) backToTopButton.classList.add('visible');
+            else backToTopButton.classList.remove('visible');
         });
         
         backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
-        // Notification system
+        // Notification System
         function showNotification(message, type = 'info') {
             const notification = document.getElementById('notification');
-            const notificationMessage = notification.querySelector('.notification-message');
+            const titleEl = notification.querySelector('.notification-title');
+            const msgEl = notification.querySelector('.notification-message');
             
-            // Set message
-            notificationMessage.textContent = message;
+            msgEl.textContent = message;
             
-            // Set color based on type
             if (type === 'error') {
                 notification.style.borderLeftColor = 'var(--danger)';
-                notification.querySelector('.notification-title').textContent = 'Error';
+                titleEl.textContent = 'Error';
             } else if (type === 'success') {
                 notification.style.borderLeftColor = 'var(--accent)';
-                notification.querySelector('.notification-title').textContent = 'Success';
+                titleEl.textContent = 'Success';
             } else {
                 notification.style.borderLeftColor = 'var(--primary)';
-                notification.querySelector('.notification-title').textContent = 'Info';
+                titleEl.textContent = 'Info';
             }
             
-            // Show notification
             notification.classList.add('show');
-            
-            // Hide after 3 seconds
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            setTimeout(() => notification.classList.remove('show'), 3000);
         }
         
-        // Smooth scrolling for navigation links
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2325,7 +2224,7 @@ Mohon segera diproses, terima kasih.
             });
         });
         
-        // Header scroll effect
+        // Header Scroll Effect
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 50) {
@@ -2337,13 +2236,8 @@ Mohon segera diproses, terima kasih.
             }
         });
         
-        // Add animation on scroll
-        const scrollObserverOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-        
+        // Add Scroll Animation
+        const scrollObserverOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2353,7 +2247,6 @@ Mohon segera diproses, terima kasih.
             });
         }, scrollObserverOptions);
         
-        // Observe all feature cards and price cards
         document.querySelectorAll('.feature-card, .price-card, .stat-card, .resume-item, .testimonial-card').forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(20px)';
@@ -2361,7 +2254,7 @@ Mohon segera diproses, terima kasih.
             scrollObserver.observe(card);
         });
         
-        // Mobile menu toggle
+        // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const nav = document.querySelector('nav ul');
         
